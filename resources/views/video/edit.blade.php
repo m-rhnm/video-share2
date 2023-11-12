@@ -6,29 +6,29 @@
                 <div class="row">
                 <!-- upload -->
                     <div class="col-md-8">
-						<h1 class="page-title"><span>آپلود</span> فیلم</h1>
-						<form action="{{ route('videos.store') }}" method="post">
+						<h1 class="page-title"><span>ویرایش</span> فیلم</h1>
+						<form action="{{ route('videos.update',$video->slug)}}" method="post">
                             @csrf
                         	<div class="row">
                             <div class="col-md-6">
                                 	<label>عنوان</label>
-                                    <input type="text" name='name' class="form-control" value="{{ old('name') }}" placeholder="عنوان">
+                                    <input type="text" name='name' class="form-control" value="{{ $video->name }}" placeholder="عنوان">
                                 </div>
                             	<div class="col-md-6">
                                 	<label>مدت زمان </label>
-                                    <input type="text" name='length' class="form-control" value="{{ old('length') }}" placeholder="عنوان">
+                                    <input type="text" name='length' class="form-control" value="{{ $video->length }}" placeholder="عنوان">
                                 </div>
                             	<div class="col-md-6">
                                 	<label>دسته بندی</label>
-                                    <input type="text" name='category' class="form-control"value="{{ old('category') }}" placeholder="دسته بندی">
+                                    <input type="text" name='category' class="form-control"value="{{ $video->category }}" placeholder="دسته بندی">
                                 </div>
                             	<div class="col-md-6">
                                 	<label>برچسب ها</label>
-                                    <input type="text" name='slug' class="form-control" value="{{ old('slug') }}" placeholder="برچسب ها">
+                                    <input type="text" name='slug' class="form-control" value="{{ $video->slug }}" placeholder="برچسب ها">
                                 </div>
                                 <div class="col-md-6">
                                 	<label>ادرس فیلم</label>
-                                    <input type="text" name='url' class="form-control" value="{{ old('url') }}" placeholder="ادرس فیلم">
+                                    <input type="text" name='url' class="form-control" value="{{ $video->url }}" placeholder="ادرس فیلم">
                                 </div>
                             	<!-- <div class="col-md-6">
                                 	<label>آپلود فیلم</label>
@@ -36,11 +36,11 @@
                                 </div> -->
                             	<div class="col-md-12">
                                 	<label>توضیحات</label>
-                                    <textarea class="form-control" name="description" rows="4"  placeholder="توضیح">{{ old('description') }}</textarea>
+                                    <textarea class="form-control" name="description" rows="4"  placeholder="توضیح">{{ $video->description }}</textarea>
                                 </div>
                                 <div class="col-md-6">
                                 	<label>ادرس عکس</label>
-                                    <input type="text" name='thumbnail' class="form-control" value="{{ old('thumbnail') }}"placeholder="ادرس عکس">
+                                    <input type="text" name='thumbnail' class="form-control" value="{{ $video->thumbnail }}"placeholder="ادرس عکس">
                                 </div>
                             	<!-- <div class="col-md-6">
                                 	<label>تصویر</label>

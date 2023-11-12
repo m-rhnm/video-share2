@@ -229,13 +229,9 @@
       </div><!-- // col-md-2 -->
 
         <div id="all-output" class="col-md-10 upload">
-            @if (session('alert'))
-            <div class="alert alert-success">
-                {{ session('alert') }}
-            </div>
-            @endif
-            @yield('content')
-        
+    
+            {{ $content ?? ''}}
+          
 		</div>
       </div>
       <script src="{{ asset('js/main.js') }}"></script>

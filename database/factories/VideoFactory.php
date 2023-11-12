@@ -20,6 +20,7 @@ class VideoFactory extends Factory
             'thumbnail'=>'https://picsum.photos/446/240?random'. rand(1,99),
             'slug'=>$this->faker->slug(),
             'category'=>$this->faker->randomLetter(),
+            'description'=> $this->faker->text(),
         ];
     }
 }

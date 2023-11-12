@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\IndexController;
+use App\Http\Controllers\VideoController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -14,5 +15,12 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/',[IndexController::class,'index']);
-Route::get('store',[IndexController::class,'store']);
+Route::prefix('videos')->group(function(){
+    Route::get('/',[VideoController::class,'index'])->name('index');
+    Route::get('create',[VideoController::class,'create'])->name('videos.create');
+    Route::post('',[VideoController::class,'store'])->name('videos.store');
+    Route::get('{video}',[VideoController::class,'show'])->name('videos.show');
+    Route::get('{video}/edit',[VideoController::class,'edit'])->name('videos.edit');
+    Route::post('{video}',[VideoController::class,'update'])->name('videos.update');
+});
+
