@@ -1,9 +1,12 @@
 <?php
 
+use App\Mail\VerifyEmail;
+use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\IndexController;
 use App\Http\Controllers\VideoController;
 use App\Http\Controllers\CategoryVideoController;
+use App\Models\User;
 
 /*
 |--------------------------------------------------------------------------
@@ -36,5 +39,10 @@ Route::get('dashboard', function () {
 })->middleware(['auth'])->name('dashboard');
 
 require __DIR__.'/auth.php';
+
+Route::get('/email',function(){
+
+return new VerifyEmail();
+});
 
 
