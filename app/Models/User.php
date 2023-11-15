@@ -2,11 +2,12 @@
 
 namespace App\Models;
 
+use App\Models\Video;
+use Laravel\Sanctum\HasApiTokens;
+use Illuminate\Notifications\Notifiable;
 use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
-use Illuminate\Notifications\Notifiable;
-use Laravel\Sanctum\HasApiTokens;
 
 class User extends Authenticatable
 {
@@ -41,4 +42,14 @@ class User extends Authenticatable
     protected $casts = [
         'email_verified_at' => 'datetime',
     ];
+
+    public function getGravatarAttribute()
+    {
+        $hash = md5($this->attributes['email']);
+        return "http://s.gravatar.com/avatar/$hash";
+    }
+    public function videos()
+    {
+       return $this->hasMany(Video::class);
+    }
 }

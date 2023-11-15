@@ -11,7 +11,7 @@ class UpdateVideosRequest extends StoreVideosRequest
     public function rules()
     {
         return array_merge(parent::rules(),[
-            "slug"=> ['required', Rule::unique('videos')->ignore($this->videos),'alpha-dash'],
+            "slug"=> ['required', Rule::unique('videos')->ignore($this->video),'alpha-dash'],
         ]);
     }
 }

@@ -1,8 +1,9 @@
 <?php
 
+use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\IndexController;
 use App\Http\Controllers\VideoController;
-use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\CategoryVideoController;
 
 /*
 |--------------------------------------------------------------------------
@@ -23,4 +24,17 @@ Route::prefix('videos')->group(function(){
     Route::get('{video}/edit',[VideoController::class,'edit'])->name('videos.edit');
     Route::post('{video}',[VideoController::class,'update'])->name('videos.update');
 });
+
+Route::prefix('categories')->group(function(){
+
+    Route::get('{category:slug}/videos', [CategoryVideoController::class, 'index'])->name('categories.videos.index');
+});
+
+
+Route::get('dashboard', function () {
+    return view('dashboard');
+})->middleware(['auth'])->name('dashboard');
+
+require __DIR__.'/auth.php';
+
 

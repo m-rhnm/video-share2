@@ -13,8 +13,4 @@ class IndexController extends Controller
     $mostPopularVideos = Video::all()->random(6);
     return view("index", compact("mostPopularVideos","mostViewsVideos"));
    }
-   public function store()
-   {
-      return view("video.create");
-   }
 }

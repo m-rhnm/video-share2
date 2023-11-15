@@ -2,7 +2,9 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\User;
 use App\Models\Video;
+use App\Models\Category;
 use Illuminate\Http\Request;
 use App\Http\Requests\StoreVideosRequest;
 use App\Http\Requests\UpdateVideosRequest;
@@ -17,11 +19,12 @@ class VideoController extends Controller
     }
     public function create()
     {
-       return view("video/create");
+      $categories = Category::all();
+       return view("video/create",compact("categories"));
     }
     public function store(StoreVideosRequest $request)
     {
-       Video::create($request->all());
+       $request->user()->videos()->create($request->all());
        return redirect()->route("index")->with('alert','video upload succesfully');
     }
     public function show(Request $request ,Video $video)

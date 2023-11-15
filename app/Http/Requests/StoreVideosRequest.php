@@ -28,9 +28,9 @@ class StoreVideosRequest extends FormRequest
             'name'=>'required|string',
             'length'=>'required|integer',
             'slug'=>'required|unique:videos,slug|alpha-dash',
-            'category'=>'required|string',
             'url'=>'required|url',
             'thumbnail'=>'required|url',
+            'category_id'=> 'required|exists:categories,id',
         ];
     }
     protected function prepareForValidation()

@@ -16,19 +16,29 @@
                                 </div>
                             	<div class="col-md-6">
                                 	<label>مدت زمان </label>
-                                    <input type="text" name='length' class="form-control" value="{{ old('length') }}" placeholder="عنوان">
+                                    <input type="text" name='length' class="form-control" value="{{ old('length') }}" placeholder="مدت زمان">
                                 </div>
-                            	<div class="col-md-6">
-                                	<label>دسته بندی</label>
-                                    <input type="text" name='category' class="form-control"value="{{ old('category') }}" placeholder="دسته بندی">
+                                <div class="col-md-6">
+                                	<label>ادرس فیلم</label>
+                                    <input type="text" name='url' class="form-control" value="{{ old('url') }}" placeholder="ادرس فیلم">
+                                </div>
+                                <div class="col-md-6">
+                                	<label>ادرس عکس</label>
+                                    <input type="text" name='thumbnail' class="form-control" value="{{ old('thumbnail') }}"placeholder="ادرس عکس">
                                 </div>
                             	<div class="col-md-6">
                                 	<label>برچسب ها</label>
                                     <input type="text" name='slug' class="form-control" value="{{ old('slug') }}" placeholder="برچسب ها">
                                 </div>
                                 <div class="col-md-6">
-                                	<label>ادرس فیلم</label>
-                                    <input type="text" name='url' class="form-control" value="{{ old('url') }}" placeholder="ادرس فیلم">
+                                	<label>دسته بندی</label>
+                                    <select  class="form-control" name="category_id" id="category">.
+                                            @foreach($categories as $category)
+                                                <option class="form-control" value="{{ $category->id }}">
+                                            {{ $category->name }}
+                                                </option>
+                                            @endforeach
+                                    </select>
                                 </div>
                             	<!-- <div class="col-md-6">
                                 	<label>آپلود فیلم</label>
@@ -38,10 +48,7 @@
                                 	<label>توضیحات</label>
                                     <textarea class="form-control" name="description" rows="4"  placeholder="توضیح">{{ old('description') }}</textarea>
                                 </div>
-                                <div class="col-md-6">
-                                	<label>ادرس عکس</label>
-                                    <input type="text" name='thumbnail' class="form-control" value="{{ old('thumbnail') }}"placeholder="ادرس عکس">
-                                </div>
+                               
                             	<!-- <div class="col-md-6">
                                 	<label>تصویر</label>
                                     <input id="featured_image" name="thumbnail" type="file" class="file">

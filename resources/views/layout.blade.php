@@ -169,60 +169,34 @@
                         </li>
                     </ul>
                 </div>
+                @auth
                 <div class="col-lg-2 col-md-2 col-sm-3 hidden-xs hidden-sm">
                       <div class="dropdown">
                         <a data-toggle="dropdown" href="#" class="user-area">
-                            <div class="thumb"><img src="demo_img/user-1.png" alt=""></div>
-                            <h2>داود طاهری</h2>
+                            <div class="thumb"><img src="{{ auth()->user()->gravatar }}" alt=""></div>
+                            <h2>{{ auth()->user()->name }}</h2>
                             <h3>25 اشتراک</h3>
                             <i class="fa fa-angle-down"></i>
                         </a>
                         <ul class="dropdown-menu account-menu">
                            <li><a href="#"><i class="fa fa-edit color-1"></i>ویرایش پروفایل</a></li>
-                           <li><a href="#"><i class="fa fa-video-camera color-2"></i>اضافه کردن فیلم</a></li>
+                           <li><a href="{{ route('videos.create') }}"><i class="fa fa-video-camera color-2"></i>اضافه کردن فیلم</a></li>
                            <li><a href="#"><i class="fa fa-star color-3"></i>برگزیده</a></li>
-                           <li><a href="#"><i class="fa fa-sign-out color-4"></i>خروج</a></li>
+                           <li><a href="{{ route('logout') }}"><i class="fa fa-sign-out color-4"></i>خروج</a></li>
                         </ul>
                     </div>
                 </div>
+                @endauth
+                @guest
+                <div class="col-lg-2 col-md-2 col-sm-3 hidden-xs hidden-sm">
+                    <a href='{{ route("login.create") }}' class='btn btn-danger'>log in</a>
+                    <a href='{{ route("register.create") }}' class='btn btn-danger'>sing up</a>
+                @endguest
             </div><!-- // row -->
         </div><!-- // container-full -->
       </header><!-- // header -->
 
-      <div id="main-category">
-        <div class="container-full">
-            <div class="row">
-                <div class="col-md-12">
-                    <ul class="main-category-menu">
-                        <li class="color-1"><a href="02-category.html"><i class="fa fa-music"></i>موسیقی</a></li>
-                        <li class="color-2"><a href="02-category.html"><i class="fa fa-soccer-ball-o"></i>ورزشی</a></li>
-                        <li class="color-3"><a href="02-category.html"><i class="fa fa-gamepad"></i>بازی</a></li>
-                        <li class="color-4"><a href="02-category.html"><i class="fa fa-globe"></i>اخبار</a></li>
-                        <li class="color-1"><a href="02-category.html"><i class="fa fa-play-circle-o"></i>زنده</a></li>
-                        <li class="color-2"><a href="02-category.html"><i class="fa fa-repeat"></i>360° فیلم</a></li>
-                        <li class="color-3"><a href="02-category.html"><i class="fa fa-th-large"></i>صفحات</a>
-                            <ul>
-                                <li><a href="01-home.html">خانه </a></li>
-                                <li><a href="02-category.html">دسته بندی ها </a></li>
-                                <li><a href="03-category_videos.html">فیلم ها </a></li>
-                                <li><a href="04-category_chanels.html">کانال ها </a></li>
-                                <li><a href="05-category_playlists.html">لیست پخش</a></li>
-                                <li><a href="06-category_about.html">در باره ما</a></li>
-                                <li><a href="07-log_in_page.html">ورود </a></li>
-                                <li><a href="08-sign_up_page.html">ثبت نام </a></li>
-                                <li><a href="09-watch.html">تماشا </a></li>
-                                <li><a href="10-upload.html">آپلود </a></li>
-                                <li><a href="11-blog.html">وبلاگ </a></li>
-                                <li><a href="12-single.html">تکی </a></li>
-                                <li><a href="13-404_page.html">404 </a></li>
-                                <li><a href="14-history.html">تاریخچه </a></li>
-                            </ul>
-                        </li>
-                    </ul>
-                </div><!-- // col-md-14 -->
-              </div><!-- // row -->
-          </div><!-- // container-full -->
-      </div><!-- // main-category -->
+            <x-header-menu></x-header-menu>
 
 	  <div class="site-output">
         

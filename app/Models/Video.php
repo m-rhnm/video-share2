@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use App\Models\Category;
 use Hekmatinasser\Verta\Verta;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
@@ -13,7 +14,7 @@ class Video extends Model
         return "slug";
     }
     protected $fillable = [
-        'name','slug','category','length','description','url','thumbnail'
+        'name','slug','category_id','length','description','url','thumbnail'
     ];
     public function getLengthInHumanAttribute()
     {
@@ -25,7 +26,24 @@ class Video extends Model
     }
     public function relatedVideos(int $count = 9)
     {
-        return Video::all()->random($count);
+        return$this->Category->getRandomVideos($count);
     }
-
+    public function category()
+    {
+       return $this->belongsTo(Category::class);
+    }
+    public function getCategoryNameAttribute()
+    {
+        return $this->category?->name;
+    }
+    public function user()
+    {
+       return $this->belongsTo(User::class);
+    }
+    public function getOwnerNameAttribute(){
+        return $this->user?->name;
+    }
+    public function getOwnerAvatarAttribute(){
+        return $this->user?->gravatar;
+    }
 }

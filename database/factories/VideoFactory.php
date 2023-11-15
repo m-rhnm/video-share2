@@ -2,6 +2,8 @@
 
 namespace Database\Factories;
 
+use App\Models\Category;
+use App\Models\User;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
 class VideoFactory extends Factory
@@ -19,8 +21,9 @@ class VideoFactory extends Factory
             'url'=>'http://commondatastorage.googleapis.com/gtv-videos-bucket/sample/BigBuckBunny.mp4',
             'thumbnail'=>'https://picsum.photos/446/240?random'. rand(1,99),
             'slug'=>$this->faker->slug(),
-            'category'=>$this->faker->randomLetter(),
             'description'=> $this->faker->text(),
+            'category_id'=>Category::first(),
+            'user_id'=>User::factory() ?? User::factory(),
         ];
     }
 }
