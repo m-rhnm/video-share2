@@ -8,13 +8,14 @@ use App\Models\Category;
 use Illuminate\Http\Request;
 use App\Http\Requests\StoreVideosRequest;
 use App\Http\Requests\UpdateVideosRequest;
+use App\Models\Comment;
 
 class VideoController extends Controller
 {
     public function index()
     {
-     $mostViewsVideos = Video::all()->random(6);
-     $mostPopularVideos = Video::all()->random(6);
+     $mostViewsVideos = Video::all()->random(6)->load(['category', 'user']);
+     $mostPopularVideos = Video::all()->random(6)->load(['category', 'user']);
      return view("index", compact("mostPopularVideos","mostViewsVideos"));
     }
     public function create()
@@ -27,9 +28,9 @@ class VideoController extends Controller
        $request->user()->videos()->create($request->all());
        return redirect()->route("index")->with('alert','video upload succesfully');
     }
-    public function show(Request $request ,Video $video)
+    public function show(Request $request ,Video $video,Comment $comment)
     {
-    
+      $video->load('comments.user');
       return view("video/show",compact("video"));
     }
     public function edit(Request $request ,Video $video)

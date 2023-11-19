@@ -1,11 +1,12 @@
 <?php
-
 namespace Database\Seeders;
+
+
 
 use App\Models\Video;
 use Illuminate\Database\Seeder;
 
-class DatabaseSeeder extends Seeder
+class VideoSeeder extends Seeder
 {
     /**
      * Seed the application's database.
@@ -14,6 +15,6 @@ class DatabaseSeeder extends Seeder
      */
     public function run()
     {
-         Video::factory()->count(15)->create();
+         Video::factory()->hasComments(4)->hasLikes(20)->count(20)->create();
     }
 }

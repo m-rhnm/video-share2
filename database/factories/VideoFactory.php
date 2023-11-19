@@ -21,9 +21,9 @@ class VideoFactory extends Factory
             'url'=>'http://commondatastorage.googleapis.com/gtv-videos-bucket/sample/BigBuckBunny.mp4',
             'thumbnail'=>'https://picsum.photos/446/240?random'. rand(1,99),
             'slug'=>$this->faker->slug(),
-            'description'=> $this->faker->text(),
-            'category_id'=>Category::first(),
-            'user_id'=>User::factory() ?? User::factory(),
+            'description'=> $this->faker->realText(),
+            'category_id'=>Category::first() ?? Category::factory(),
+            'user_id'=>User::first() ?? User::factory(),
         ];
     }
 }

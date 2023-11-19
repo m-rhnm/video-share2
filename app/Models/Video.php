@@ -4,12 +4,13 @@ namespace App\Models;
 
 use App\Models\Category;
 use Hekmatinasser\Verta\Verta;
+use App\Models\Traits\Likeable;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 
 class Video extends Model
 {
-    use HasFactory;
+    use HasFactory,Likeable;
     public function getRouteKeyName(){
         return "slug";
     }
@@ -26,6 +27,7 @@ class Video extends Model
     }
     public function relatedVideos(int $count = 9)
     {
+        
         return$this->Category->getRandomVideos($count);
     }
     public function category()
@@ -40,10 +42,17 @@ class Video extends Model
     {
        return $this->belongsTo(User::class);
     }
+    public function comments()
+    {
+       return $this->hasMany(Comment::class)->orderBy('created_at','desc');
+    }
     public function getOwnerNameAttribute(){
+
         return $this->user?->name;
     }
     public function getOwnerAvatarAttribute(){
         return $this->user?->gravatar;
     }
+   
+
 }

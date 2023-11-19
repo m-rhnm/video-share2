@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class AddUserToVideos extends Migration
+class CreateCommentsTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,8 +13,12 @@ class AddUserToVideos extends Migration
      */
     public function up()
     {
-        Schema::table('videos', function (Blueprint $table) {
-            $table->foreignId('user_id')->nullable()->constrained()->nullOnDelete();
+        Schema::create('comments', function (Blueprint $table) {
+            $table->id();
+            $table->foreignId('video_id')->constrained();
+            $table->foreignId('user_id')->constrained();
+            $table->text('body');
+            $table->timestamps();
         });
     }
 
@@ -25,9 +29,6 @@ class AddUserToVideos extends Migration
      */
     public function down()
     {
-        Schema::table('videos', function (Blueprint $table) {
-            $table->dropForeign('user_id');
-            $table->dropColumn('user_id');
-        });
+        Schema::dropIfExists('comments');
     }
 }

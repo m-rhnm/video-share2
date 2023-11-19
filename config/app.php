@@ -175,6 +175,7 @@ return [
         App\Providers\EventServiceProvider::class,
         App\Providers\RouteServiceProvider::class,
         Hekmatinasser\Verta\laravel\VertaServiceProvider::class,
+        Barryvdh\Debugbar\ServiceProvider::class,
 
     ],
 
