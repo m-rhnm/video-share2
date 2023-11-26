@@ -26,10 +26,8 @@ class StoreVideosRequest extends FormRequest
     {
         return [
             'name'=>'required|string',
-            'length'=>'required|integer',
             'slug'=>'required|unique:videos,slug|alpha-dash',
-            'url'=>'required|url',
-            'thumbnail'=>'required|url',
+            'file'=>'required|file|mimetypes:video/mp4',
             'category_id'=> 'required|exists:categories,id',
         ];
     }
@@ -38,5 +36,13 @@ class StoreVideosRequest extends FormRequest
     $this->merge([
         'slug' => Str::slug($this->slug),
     ]);
+}
+public function messages(){
+    return[
+        'file.*' =>'فایل باید ویدویی باشد',
+        'thumbnail.*' =>'فایل باید تصویر باشد',
+        'slug*'=>"برچسب باید منحصر به فرد باشد",
+        'name.*'=>"نام باید حداقل 3 کاکتر باشد ",
+    ];
 }
 }

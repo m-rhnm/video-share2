@@ -7,29 +7,25 @@
                 <!-- upload -->
                     <div class="col-md-8">
 						<h1 class="page-title"><span>آپلود</span> فیلم</h1>
-						<form action="{{ route('videos.store') }}" method="post">
+						<form action="{{ route('videos.store') }}" method="post" enctype="multipart/form-data">
                             @csrf
                         	<div class="row">
                             <div class="col-md-6">
                                 	<label>عنوان</label>
                                     <input type="text" name='name' class="form-control" value="{{ old('name') }}" placeholder="عنوان">
                                 </div>
-                            	<div class="col-md-6">
-                                	<label>مدت زمان </label>
-                                    <input type="text" name='length' class="form-control" value="{{ old('length') }}" placeholder="مدت زمان">
-                                </div>
                                 <div class="col-md-6">
-                                	<label>ادرس فیلم</label>
-                                    <input type="text" name='url' class="form-control" value="{{ old('url') }}" placeholder="ادرس فیلم">
-                                </div>
-                                <div class="col-md-6">
-                                	<label>ادرس عکس</label>
-                                    <input type="text" name='thumbnail' class="form-control" value="{{ old('thumbnail') }}"placeholder="ادرس عکس">
-                                </div>
-                            	<div class="col-md-6">
                                 	<label>برچسب ها</label>
                                     <input type="text" name='slug' class="form-control" value="{{ old('slug') }}" placeholder="برچسب ها">
                                 </div>
+                                <div class="col-md-6">
+                                	<label>آپلود فیلم</label>
+                                    <input id="upload_file" name="file" type="file" class="file">
+                                </div>
+                                {{-- <div class="col-md-6">
+                                	<label>تصویر</label>
+                                    <input id="featured_image" name="thumbnail" type="file" class="file">
+                                </div> --}}
                                 <div class="col-md-6">
                                 	<label>دسته بندی</label>
                                     <select  class="form-control" name="category_id" id="category">.
@@ -40,19 +36,10 @@
                                             @endforeach
                                     </select>
                                 </div>
-                            	<!-- <div class="col-md-6">
-                                	<label>آپلود فیلم</label>
-                                    <input id="upload_file" name="url" type="file" class="file">
-                                </div> -->
                             	<div class="col-md-12">
                                 	<label>توضیحات</label>
                                     <textarea class="form-control" name="description" rows="4"  placeholder="توضیح">{{ old('description') }}</textarea>
                                 </div>
-                               
-                            	<!-- <div class="col-md-6">
-                                	<label>تصویر</label>
-                                    <input id="featured_image" name="thumbnail" type="file" class="file">
-                                </div> -->
                             	<div class="col-md-6">
                                     <button type="submit" id="contact_submit" class="btn btn-dm">ذخیره</button>
                                 </div>

@@ -7,6 +7,7 @@ use Hekmatinasser\Verta\Verta;
 use App\Models\Traits\Likeable;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Illuminate\Support\Facades\Storage;
 
 class Video extends Model
 {
@@ -15,11 +16,11 @@ class Video extends Model
         return "slug";
     }
     protected $fillable = [
-        'name','slug','category_id','length','description','url','thumbnail'
+        'name','slug','category_id','length','description','path','thumbnail'
     ];
     public function getLengthInHumanAttribute()
     {
-        return gmdate("i:s", $this->value);
+        return gmdate("i:s", $this->length);
     }
     public function getCreatedAtAttribute($value)
     {
@@ -53,6 +54,11 @@ class Video extends Model
     public function getOwnerAvatarAttribute(){
         return $this->user?->gravatar;
     }
-   
 
+    public function getVideoUrlAttribute(){
+        return '/storage/'.$this->path;
+    }
+    public function getVideoThumbnailAttribute(){
+        return '/storage/'.$this->thumbnail;
+    }
 }

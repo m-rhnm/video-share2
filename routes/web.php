@@ -11,6 +11,7 @@ use App\Http\Controllers\VideoController;
 use App\Http\Controllers\DisikeController;
 use App\Http\Controllers\CommentController;
 use App\Http\Controllers\CategoryVideoController;
+use App\services\FFmpegAdapter;
 
 /*
 |--------------------------------------------------------------------------
@@ -52,4 +53,9 @@ Route::get('/jobs',function(){
     ProcessVideo::dispatch();
 });
 
+Route::get('duration',function(){
+    $path = '8mx7QExM7BMjFVxBZ0r4TzwbMtpgjvztKKsuB6qs.mp4';
+    $service = new FFmpegAdapter($path);
+    dd($service->getDuration());
+});
 

@@ -13,7 +13,7 @@
                         <div class="video-code">
                             <video controls style="height: 100%; width: 100%;">
                                 <source
-                                    src="{{ $video->url }}"
+                                    src="{{ $video->video_url }}"
                                     type="video/mp4">
                             </video>
 
