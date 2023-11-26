@@ -7,11 +7,14 @@ use Illuminate\Http\Request;
 
 class CategoryVideoController extends Controller
 {
-    public function index(Category $category)
+    public function index(Request $request,Category $category)
     {
-        $videos = $category->videos()->paginate();
+        $videos = $category
+        ->videos()
+        ->filter($request->all())
+        ->paginate(18)
+        ->withQueryString();
         $title = $category->name;
-
-        return view('videos.index', compact('videos', 'title'));
+        return view('video.index', compact('videos', 'title'));
     }
 }

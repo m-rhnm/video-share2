@@ -3,11 +3,12 @@
 namespace App\Models;
 
 use App\Models\Category;
+use App\Filters\VideoFilter;
 use Hekmatinasser\Verta\Verta;
 use App\Models\Traits\Likeable;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
-use Illuminate\Support\Facades\Storage;
 
 class Video extends Model
 {
@@ -47,18 +48,26 @@ class Video extends Model
     {
        return $this->hasMany(Comment::class)->orderBy('created_at','desc');
     }
-    public function getOwnerNameAttribute(){
+    public function getOwnerNameAttribute()
+    {
 
         return $this->user?->name;
     }
-    public function getOwnerAvatarAttribute(){
+    public function getOwnerAvatarAttribute()
+    {
         return $this->user?->gravatar;
     }
 
-    public function getVideoUrlAttribute(){
+    public function getVideoUrlAttribute()
+    {
         return '/storage/'.$this->path;
     }
-    public function getVideoThumbnailAttribute(){
+    public function getVideoThumbnailAttribute()
+    {
         return '/storage/'.$this->thumbnail;
+    }
+    public function scopeFilter(Builder $query, array $params )
+    {
+       return (new VideoFilter($query))->apply($params);
     }
 }
