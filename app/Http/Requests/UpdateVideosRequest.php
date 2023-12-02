@@ -12,7 +12,7 @@ class UpdateVideosRequest extends StoreVideosRequest
     {
         return array_merge(parent::rules(),[
             "slug"=> ['required', Rule::unique('videos')->ignore($this->video),'alpha-dash'],
-            'url'=>'file|mimetypes:video/mp4|nullable',
+            'file'=>'file|mimetypes:video/mp4|nullable',
         ]);
     }
 }

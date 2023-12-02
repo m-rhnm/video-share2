@@ -9,15 +9,19 @@ use App\Models\Traits\Likeable;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Illuminate\Database\Eloquent\SoftDeletes;
 
 class Video extends Model
 {
-    use HasFactory,Likeable;
+    use HasFactory,Likeable,SoftDeletes;
     public function getRouteKeyName(){
         return "slug";
     }
     protected $fillable = [
         'name','slug','category_id','length','description','path','thumbnail'
+    ];
+    protected $appends = [
+        'category_name'
     ];
     public function getLengthInHumanAttribute()
     {

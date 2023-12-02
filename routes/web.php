@@ -1,17 +1,14 @@
 <?php
 
-use App\Models\User;
-use App\Mail\VerifyEmail;
 use App\Jobs\ProcessVideo;
-use Illuminate\Support\Facades\Mail;
+use Illuminate\Support\Facades\Cache;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\LikeController;
-use App\Http\Controllers\IndexController;
 use App\Http\Controllers\VideoController;
 use App\Http\Controllers\DisikeController;
 use App\Http\Controllers\CommentController;
 use App\Http\Controllers\CategoryVideoController;
-use App\services\FFmpegAdapter;
+use App\Models\Like;
 
 /*
 |--------------------------------------------------------------------------
@@ -53,9 +50,12 @@ Route::get('/jobs',function(){
     ProcessVideo::dispatch();
 });
 
-Route::get('duration',function(){
-    $path = '8mx7QExM7BMjFVxBZ0r4TzwbMtpgjvztKKsuB6qs.mp4';
-    $service = new FFmpegAdapter($path);
-    dd($service->getDuration());
+Route::get('cache',function()
+{
+   $value = Cache::remember('video-like', 10 , function () 
+    {
+        return Like::all()->count();
+    });
+    dump($value);
 });
 

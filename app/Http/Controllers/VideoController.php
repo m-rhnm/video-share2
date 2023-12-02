@@ -5,13 +5,17 @@ namespace App\Http\Controllers;
 use App\Models\Video;
 use App\Models\Comment;
 use App\Models\Category;
-use App\services\VideoService;
 use Illuminate\Http\Request;
+use App\services\VideoService;
+use Illuminate\Support\Facades\Gate;
 use App\Http\Requests\StoreVideosRequest;
 use App\Http\Requests\UpdateVideosRequest;
 
 class VideoController extends Controller
 {
+    public function __construct() {
+     $this->authorizeResource(Video::class,'video');
+    }
     public function index()
     {
      $mostViewsVideos = Video::all()->random(6)->load(['category', 'user']);
